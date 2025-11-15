@@ -1,16 +1,16 @@
-const express = require("express");
-const app = express();
-const PORT = process.env.PORT || 3000;
+const http = require("http");
 
-//app.get("/", (req, res) => {
-//    res.send("Hello from Jira Demo App!");
-//
-//});
-
-app.get('/', (req, res) => {
-  res.send('Welcome to the Homepage!');
+const server = http.createServer((req, res) => {
+  if (req.url === "/") {
+    res.writeHead(200, { "Content-Type": "text/plain" });
+    res.end("Welcome to the Homepage!");
+  } else {
+    res.writeHead(404);
+    res.end("Not Found");
+  }
 });
 
-app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
+server.listen(3000, () => {
+  console.log('Server running on http://localhost:3000');
 });
+
